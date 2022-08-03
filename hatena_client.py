@@ -1,6 +1,5 @@
 import os
 import requests
-import xml.etree.ElementTree as ET
 import xmltodict as XTD
 from dotenv import load_dotenv
 
