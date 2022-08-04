@@ -1,0 +1,34 @@
+name: Backup article
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.8", "3.9", "3.10"]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
+      - name: get backup
+        run: |
+          python -m pip install -r requirements.txt
+          python hatena_client.py
+        env:
+          HATENA_ID: ${{ secrets.HATENA_ID }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          BLOG_ID: ${{ secrets.BLOG_ID }}
+      - name: Commit files
+        run: |
+          git config --local user.email "progllama.rust@gmail.com"
+          git config --local user.name "llama"
+          git add .
+          git commit -m "Add changes" -a
+          git push

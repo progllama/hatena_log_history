@@ -14,3 +14,7 @@ activate:
 .PHONY: deactivate
 deactivate:
 	deactivate
+
+.PHONY: backup
+backup:
+	pip install -r requirements.txt
