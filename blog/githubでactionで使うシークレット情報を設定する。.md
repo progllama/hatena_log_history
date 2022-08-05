@@ -1,0 +1,2 @@
+仕様するリポジトリに移動しsettingsのsecretのactionsを選択
+右上にあるNew Repository Secretで必要な設定情報を追加していく。

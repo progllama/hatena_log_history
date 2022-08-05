@@ -2,6 +2,7 @@
 - [script](#script)
 - [.env](#.env)
 - [apiキーの取得](#apiキーの取得)
+- [github actionを使って自動化](#githubactionを使って自動化)
 - [リポジトリ](#リポジトリ)
 
 # script
@@ -49,6 +50,49 @@ BLOG_ID=good-yuuta.hatenablog.com
 APIキーという項目があるのでそこからアカウント設定に移動
 そこでもAPIキーという項目があるのでそこから作る。
 再度同じページに行くとAPIキーが表示されるのでそれを利用する。
+
+# githubactionを使って自動化
+```
+name: Backup article
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10"]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
+      - name: get backup
+        run: |
+          python -m pip install -r requirements.txt
+          python hatena_client.py
+        env:
+          HATENA_ID: ${{ secrets.HATENA_ID }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          BLOG_ID: ${{ secrets.BLOG_ID }}
+      - name: Commit files
+        run: |
+          git config --local user.email "progllama.rust@gmail.com"
+          git config --local user.name "llama"
+          git add .
+          git commit -m "Add changes" -a
+          git push
+```
+python環境のセットアップは[こちら](https://docs.github.com/ja/actions/automating-builds-and-tests/building-and-testing-python)を参考
+
+[秘密情報の設定](https://good-yuuta.hatenablog.com/entry/2022/08/04/235543?_ga=2.194778541.1259619272.1659535935-1524494941.1630950902)
+
+現時点の課題は変更がない場合にステータスがエラーになってしまうこと。
 
 # リポジトリ
 
