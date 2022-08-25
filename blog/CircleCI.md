@@ -1,0 +1,2 @@
+- [terminology](https://good-yuuta.hatenablog.com/entry/2022/08/13/021823?_ga=2.126890378.665084495.1660252211-1524494941.1630950902)
+- [CircleCI CLIで注意すること](https://good-yuuta.hatenablog.com/entry/2022/08/13/042531?_ga=2.29242683.665084495.1660252211-1524494941.1630950902)

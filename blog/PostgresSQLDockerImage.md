@@ -1,0 +1,5 @@
+- 必要な環境変数はPOSTGRES_PASSWORDだけでそれ以外はオプショナル。
+- POSTGRES_PASSWORD
+  - postgresqlのsuperuserのパスワードを定義する。
+- POSTGRES_USER
+  - superuserを定義する
