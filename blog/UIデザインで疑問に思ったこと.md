@@ -1,0 +1,1 @@
+- heder, sidebar, main, footer,の色を分けるのは何故?
