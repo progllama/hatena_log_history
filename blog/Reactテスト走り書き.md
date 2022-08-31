@@ -56,3 +56,26 @@ Jest は jsdom を通じて DOM にアクセスできる JavaScript のテスト
 React Testing Library は実装の詳細に依存せずに React コンポーネントをテストすることができるツールセットです。このアプローチはリファクタリングを容易にし、さらにアクセシビリティのベスト・プラクティスへと手向けてくれます。コンポーネントを children 抜きに「浅く」レンダーする方法は提供していませんが、Jest のようなテストランナーで モック することで可能です。
 
 一般的には、スナップショットを使うよりもより個別的なアサーションを行う方がベターです。
+
+# toHogeでの比較では関数を伴ったオブジェクトの比較はできない。
+
+# プロパティの受け渡しテスト。
+```
+expect(mockChildComponent).toHaveBeenCalledWith(
+    expect.objectContaining({
+      open: true,
+      data: "some data",
+    })
+  );
+// 一回しか呼ばれない時
+
+expect(mockFn.mock.calls).toEqual([
+  [arg1, arg2, ...], // First call
+  [arg1, arg2, ...]  // Second call
+]);
+// 内部で複数回呼ばれる場合(リストアイテムとか)
+```
+
+```
+
+```
